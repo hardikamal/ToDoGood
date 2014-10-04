@@ -33,9 +33,12 @@ class AddTaskViewController: UIViewController , UITextFieldDelegate {
     }
     @IBAction func btnClickAction( sender: UIButton){
         
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd hh:mm a"
+        
         if (txtTask.text != "") {
                 NSLog("%@", txtTask.text)
-            taskMngr.addTask(txtTask.text, desc: txtDesc.text, amnt: NSString(format: "$%.02f", motivationLevel.value))
+            taskMngr.addTask(txtTask.text, desc: txtDesc.text, strtDate: formatter.stringFromDate(NSDate()),amnt: NSString(format: "$%.02f", motivationLevel.value))
         self.view.endEditing(true)
         txtTask.text = ""
         txtDesc.text = ""
