@@ -37,31 +37,25 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="MGH-mB-B3y"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xF6-5D-mQe">
+                                <rect key="frame" x="146" y="506" width="38" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <segue destination="bTV-pz-Ha5" kind="push" id="Wf9-EU-11P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="O1E-d7-uiL"/>
                     <connections>
+                        <outlet property="addTask" destination="xF6-5D-mQe" id="ZPR-V0-LeN"/>
                         <outlet property="tblTasks" destination="Nev-Tm-EzP" id="ELB-5Z-CfH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="381" y="671"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Nu9-np-Wvv">
-            <objects>
-                <viewController id="Jgm-u8-hYW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LY8-EH-vE6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t31-wu-nlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="753.06666666666661" y="142.94666666666666"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Qgf-4h-Uem">
@@ -75,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQD-ZA-jVF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="982" y="1124"/>
+            <point key="canvasLocation" x="1500" y="1440"/>
         </scene>
         <!--Hello-->
         <scene sceneID="ung-V4-0ZE">
@@ -117,10 +111,75 @@
             </objects>
             <point key="canvasLocation" x="-60.799999999999997" y="671.18666666666661"/>
         </scene>
+        <!--Add Task-->
+        <scene sceneID="cf1-WQ-qyA">
+            <objects>
+                <viewController id="bTV-pz-Ha5" customClass="AddTaskViewController" customModule="ToDoGood" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fEB-ZU-bbg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task" minimumFontSize="17" id="qxZ-vL-XKN">
+                                <rect key="frame" x="27" y="88" width="260" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bTV-pz-Ha5" id="TPs-w1-Nuj"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" minimumFontSize="17" id="1Zn-6u-IZk">
+                                <rect key="frame" x="27" y="126" width="260" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bTV-pz-Ha5" id="UPj-pc-mnt"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cUo-5H-Kod">
+                                <rect key="frame" x="241" y="173" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnClickAction:" destination="bTV-pz-Ha5" eventType="touchUpInside" id="Dz9-u6-XRy"/>
+                                    <segue destination="vXZ-lx-hvc" kind="push" id="G66-eC-o9d"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Tasks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ECU-aJ-Xgj">
+                                <rect key="frame" x="97" y="33" width="143" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Add Task" image="second" id="Rum-02-6rW"/>
+                    <navigationItem key="navigationItem" id="0vV-Sg-Kab"/>
+                    <connections>
+                        <outlet property="txtDesc" destination="1Zn-6u-IZk" id="kor-ZA-OMl"/>
+                        <outlet property="txtTask" destination="qxZ-vL-XKN" id="dgq-eV-sSa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Hh-wF-Onl" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="832" y="683"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="second" width="540" height="960"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="G66-eC-o9d"/>
+    </inferredMetricsTieBreakers>
 </document>

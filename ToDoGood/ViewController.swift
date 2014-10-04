@@ -12,9 +12,22 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     
     @IBOutlet var tblTasks: UITableView!
     
+    @IBOutlet weak var addTask: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        self.addTask?.backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 0, alpha: 1.0)
+        println(NSString(format: "%@", addTask.frame.size.width/2-30))
+        var label = UILabel(frame: CGRectMake(0, 0, addTask.frame.size.width, addTask.frame.size.height))
+        label.text = "+"
+        label.textAlignment = NSTextAlignment.Center
+        label.font = UIFont.systemFontOfSize(60)
+        label.textColor = UIColor.whiteColor()
+        self.addTask?.addSubview(label)
+
     }
     
     override func didReceiveMemoryWarning() {

@@ -14,6 +14,7 @@
 		7671607519DFF7040009AF20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7671607319DFF7040009AF20 /* LaunchScreen.xib */; };
 		7671608119DFF7040009AF20 /* ToDoGoodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7671608019DFF7040009AF20 /* ToDoGoodTests.swift */; };
 		7671608B19DFF7B30009AF20 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7671608A19DFF7B30009AF20 /* TaskManager.swift */; };
+		7671608D19E074B40009AF20 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7671608C19E074B40009AF20 /* AddTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		7671607F19DFF7040009AF20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7671608019DFF7040009AF20 /* ToDoGoodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoGoodTests.swift; sourceTree = "<group>"; };
 		7671608A19DFF7B30009AF20 /* TaskManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		7671608C19E074B40009AF20 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				7671606A19DFF7040009AF20 /* AppDelegate.swift */,
 				7671606C19DFF7040009AF20 /* ViewController.swift */,
+				7671608C19E074B40009AF20 /* AddTaskViewController.swift */,
 				7671608A19DFF7B30009AF20 /* TaskManager.swift */,
 				7671606E19DFF7040009AF20 /* Main.storyboard */,
 				7671607119DFF7040009AF20 /* Images.xcassets */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7671608B19DFF7B30009AF20 /* TaskManager.swift in Sources */,
+				7671608D19E074B40009AF20 /* AddTaskViewController.swift in Sources */,
 				7671606D19DFF7040009AF20 /* ViewController.swift in Sources */,
 				7671606B19DFF7040009AF20 /* AppDelegate.swift in Sources */,
 			);
