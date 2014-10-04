@@ -20,7 +20,6 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         
         
         self.addTask?.backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 0, alpha: 1.0)
-        println(NSString(format: "%@", addTask.frame.size.width/2-30))
         var label = UILabel(frame: CGRectMake(0, 0, addTask.frame.size.width, addTask.frame.size.height))
         label.text = "+"
         label.textAlignment = NSTextAlignment.Center
