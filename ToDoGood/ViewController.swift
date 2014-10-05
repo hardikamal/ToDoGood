@@ -29,6 +29,8 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         self.nameLabel.text = userName
         self.noGoals.text = "No Goals? Press '+' below and get started in improving your efficiency!"*/
         
+        self.navigationController?.navigationBarHidden = false
+        
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
         
         self.noGoals.editable = false
@@ -78,6 +80,10 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
             userName = userDefault.objectForKey("userName") as String
             self.nameLabel.text = userName
             self.noGoals.text = "No Goals? Press '+' below and get started in improving your efficiency!"
+        }
+        if userDefault.objectForKey("tasks") == nil {
+            var tasks: AnyObject? = userDefault.objectForKey("tasks")
+                
         }
         
         if userDefault.objectForKey("taskMngr") != nil {
@@ -223,7 +229,17 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     //    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     
     func missedDeadline() {
-        println("Missed Deadline")
+        var alertText = NSString(format: "You missed the deadline and donated %@", taskMngr.tasks[0].amnt)
+        let alert = UIAlertController(title: "Aww...", message: alertText, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addAction(UIAlertAction(title: "OK",
+            style: UIAlertActionStyle.Default,
+            handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        taskMngr.tasks.removeAtIndex(0)
+        tblTasks.reloadData()
     }
     
 }

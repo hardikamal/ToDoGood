@@ -8,17 +8,23 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController , UITextFieldDelegate/*, UIPickerViewDataSource, UIPickerViewDelegate*/ {
+class SettingsViewController: UIViewController , UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, PayPalPaymentDelegate {
 
+    
+    var config = PayPalConfiguration()
+    
+    
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var name: UITextField!
     //@IBOutlet weak var charityPicker: UIPickerView!
     
-    //var charityArray = ["American Cancer Society", "Salvation Army", "Red Cross"]
+    @IBOutlet weak var charityList: UITableView!
+    var charityArray = ["American Cancer Society", "Salvation Army", "Red Cross"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        charityList.userInteractionEnabled = true
         // Do any additional setup after loading the view.
         
         self.doneButton?.backgroundColor = UIColor(red: 255/255, green: 204/255, blue: 0, alpha: 1.0)
@@ -29,15 +35,39 @@ class SettingsViewController: UIViewController , UITextFieldDelegate/*, UIPicker
         label.textColor = UIColor.whiteColor()
         self.doneButton?.addSubview(label)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true);
+        PayPalMobile.preconnectWithEnvironment(PayPalEnvironmentNoNetwork)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func setUpPayment(sender: AnyObject) {
+    @IBAction func SetUp(sender: AnyObject) {
+        
+        
+        let amount = NSDecimalNumber.decimalNumberWithString("1.00")
+        
+        
+        println("amount \(amount)")
+        
+        var payment = PayPalPayment()
+        payment.amount = amount
+        payment.currencyCode = "USD"
+        payment.shortDescription = "Task"
+       
+            var paymentViewController = PayPalPaymentViewController(payment: payment, configuration: config, delegate: self)
+            self.presentViewController(paymentViewController, animated: false, completion: nil)
         
     }
+    
+    
+    
+    
+    
     @IBAction func Done(sender: AnyObject) {
         var userDefault = NSUserDefaults.standardUserDefaults()
         if self.name.text != "" {
@@ -61,14 +91,44 @@ class SettingsViewController: UIViewController , UITextFieldDelegate/*, UIPicker
         // Pass the selected object to the new view controller.
     }
     */
+  
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true)
+  
+    
+    func payPalPaymentViewController(paymentViewController: PayPalPaymentViewController!, didCompletePayment completedPayment: PayPalPayment!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool{
-        textField.resignFirstResponder()
-        return true
+    func payPalPaymentDidCancel(paymentViewController: PayPalPaymentViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return charityArray.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView .selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Top)
+        println("YES")
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle , reuseIdentifier: "test")
+        cell.textLabel?.text = charityArray[indexPath.row]
+        
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    
+    
 
 }
