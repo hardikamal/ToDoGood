@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="377" y="671"/>
         </scene>
-        <!--Main View Controller-->
+        <!--View Controller-->
         <scene sceneID="Qgf-4h-Uem">
             <objects>
-                <viewController id="bnh-yS-S2u" customClass="ZZMainViewController" sceneMemberID="viewController">
+                <viewController id="bnh-yS-S2u" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9QY-Km-C8g">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

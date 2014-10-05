@@ -16,12 +16,13 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     
     @IBOutlet weak var noGoals: UITextView!
     
-    //var userName: String()
+    var userName:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        /*var userDefault = NSUserDefaults.standardUserDefaults()
+        var userDefault = NSUserDefaults.standardUserDefaults()
         if userDefault.objectForKey("userName") == nil {
             var alert = UIAlertView()
             alert.title = "What is your name?"
@@ -29,7 +30,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
             alert.delegate = self
             alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
             alert.show()
-        }*/
+        }
         
         self.tblTasks.rowHeight = 60
         self.tblTasks?.separatorStyle = UITableViewCellSeparatorStyle.None
