@@ -22,6 +22,8 @@ class AddTaskViewController: UIViewController , UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        
         picker.datePickerMode = UIDatePickerMode.DateAndTime
         picker.addTarget(self, action: "datePickerChanged", forControlEvents: UIControlEvents.AllEvents)
         txtDesc.inputView = picker
@@ -31,7 +33,19 @@ class AddTaskViewController: UIViewController , UITextFieldDelegate {
         motivationLevelLabel.tag = 1996
         self.view.addSubview(motivationLevelLabel)
     }
+    
     @IBAction func btnClickAction( sender: UIButton){
+        
+        if txtTask.text == "" || txtDesc.text == "" {
+            let alert = UIAlertController(title: "Opps!", message: "Please fill in all text fields before saving.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
         
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd hh:mm a"

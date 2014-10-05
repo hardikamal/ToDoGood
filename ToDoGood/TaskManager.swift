@@ -26,4 +26,5 @@ class TaskManager: NSObject {
     func addTask(name: String , desc:String, strtDate: String, amnt:String){
         tasks.append(task(name: name, desc: desc, strtDate: strtDate, amnt: amnt))
     }
+    
 }

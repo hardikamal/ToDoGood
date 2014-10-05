@@ -16,21 +16,23 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     
     @IBOutlet weak var noGoals: UITextView!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    
     var userName:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var userDefault = NSUserDefaults.standardUserDefaults()
-        if userDefault.objectForKey("userName") == nil {
-            var alert = UIAlertView()
-            alert.title = "What is your name?"
-            alert.addButtonWithTitle("Done")
-            alert.delegate = self
-            alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
-            alert.show()
-        }
+        //Emulate User Having Gone To Settings
+        /*userName = "AMAL NANAVATI"
+        self.nameLabel.text = userName
+        self.noGoals.text = "No Goals? Press '+' below and get started in improving your efficiency!"*/
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        
+        self.noGoals.editable = false
+        self.noGoals.userInteractionEnabled = false
         
         self.tblTasks.rowHeight = 60
         self.tblTasks?.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -52,6 +54,36 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
         var timer = NSTimer.scheduledTimerWithTimeInterval(1.00, target: tblTasks, selector: Selector("reloadData"), userInfo: nil, repeats: true)
 
     }
+    @IBAction func addTask(sender: AnyObject) {
+        if self.noGoals.text == "Welcome! Click Settings To Get Started." {
+            let alert = UIAlertController(title: "Oops!", message: "Before creating goals, please go to Setting to configure the app.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alert.addAction(UIAlertAction(title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: nil))
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            let addTaskViewController = self.storyboard?.instantiateViewControllerWithIdentifier("addTask") as UIViewController
+            self.navigationController?.pushViewController(addTaskViewController, animated: true)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        if userDefault.objectForKey("userName") == nil {
+            self.nameLabel.text = ""
+            self.noGoals.text = "Welcome! Click Settings To Get Started."
+        } else {
+            userName = userDefault.objectForKey("userName") as String
+            self.nameLabel.text = userName
+            self.noGoals.text = "No Goals? Press '+' below and get started in improving your efficiency!"
+        }
+        
+        if userDefault.objectForKey("taskMngr") != nil {
+            taskMngr = userDefault.objectForKey("taskMngr")?.decodeObject() as TaskManager
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,10 +103,7 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
             
             alert.addAction(UIAlertAction(title: "Great!",
                 style: UIAlertActionStyle.Default,
-                handler: {
-                    (alert: UIAlertAction!) in println("An alert of type \(alert.style.hashValue) was tapped!")
-                    self.tblTasks?.deselectRowAtIndexPath(indexPath, animated: true)
-            }))
+                handler: nil))
             
             self.presentViewController(alert, animated: true, completion: nil)
             
@@ -90,6 +119,26 @@ class ViewController: UIViewController , UITableViewDelegate , UITableViewDataSo
     
     override func viewWillAppear(animated: Bool) {
         tblTasks.reloadData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        var userDefault = NSUserDefaults.standardUserDefaults()
+        if userName != "" {
+            if userDefault.objectForKey("userName") == nil {
+                userDefault.setObject(self.userName, forKey: "userName")
+            } else {
+                userDefault.removeObjectForKey("userName")
+                userDefault.setObject(self.userName, forKey: "userName")
+            }
+        }
+        if taskMngr.tasks.count != 0 {
+            if userDefault.objectForKey("taskMngr") == nil {
+                userDefault.setObject(taskMngr.encode(), forKey: "taskMngr")
+            } else {
+                userDefault.removeObjectForKey("taskMngr")
+                userDefault.setObject(taskMngr.encode(), forKey: "taskMngr")
+            }
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
